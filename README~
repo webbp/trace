@@ -1,0 +1,120 @@
+A little help with the trace program.
+
+To compile:
+
+make
+
+To run:
+
+trace -p pfile -l lexfile
+
+where pfile is a parameter file and lexfile is a lexicon file.
+
+The program should be run on a regular terminal or in a
+terminal-emulator window.  
+
+Two parameter files are provided:
+
+params -- these are the basic parameters used in McC&Elman, 1986
+copars -- parameters used for categorical perception simulations
+		in the above article; used with cptrace, see below.
+		
+One lexicon file is provided:
+
+slex -- this is the lexicon described in McC&Elman.	
+
+Different definitions of some phonemes were used in the
+trading relations and categorical perception simulations.
+A different version of the program must be comstructed for these,
+called cptrace.  To compile:
+
+make cptrace
+
+it takes the -p and -l arguments, also.
+
+[cptrace differs from trace in using a different set of
+phoneme declarations.  The standard versio of this stuff is
+in gfv.c; for cptrace, it is in cpfv.c]
+
+Once the program is running, if you type ? you will see
+a list of possible commands.  Some are self-explanatory.
+Some of those that may not be or are very important are:
+
+test:  prompts for a string of phonemes to test, resets
+       all activations to resting levels, and executes
+       nreps processing cycles.
+cycle: continues processing for nreps more cycles.
+pfreq: determines the frequency in cycles of redisplay of
+       activations at phoneme and word levels.  Prompts with 
+       "change? "  Enter 'n' or a new value.
+nreps: determines the number of cycles executed when the
+       test or cycle commands are entered.
+alpha: displays excitation parameters with labels.  Prompts 
+       with "change? "  Enter the label then the new value for
+       each one you wish to change.
+gamma: displays inhibition parameters also with labels.
+finput: reads commands from a file, prompts for file name.
+
+commands that begin with s are often commands that save
+things in a file.  
+
+Some of the commands are not used, such as grace, coart.  
+
+Many of the commands have to do with saving files
+for producing figures like those in McC&Elman, for
+use by the leroy program; these probably will not
+be of use to you since you probably do not have 
+leroy.
+
+NOTES:
+
+only the following phonemes are defined:
+	pbtdkgsSrlaiu^
+	- means one phoneme's worth of silence.
+	
+This can be changed, but requires making up
+feature codes for additional phonemes and
+defining them in a new version of the file gfv.c, also adding
+them to the list of "phonchars" and redefining
+a few things to take the changes into account.  All the
+stuff that needs to be changed is in the files
+"defs.h" and "gfv.c"
+
+The model can take word frequency into account,
+but we have not explored this.  The command
+
+freqscale
+
+is used to scale log frequencies and add to
+the resting level of word units.  Use a
+small value (e.g., .0005) and use the rest
+command to set the word level resting level
+to about -.06.  With this, the resting level
+of all word units will be scaled between
+-.06 and about -.01.  To compress the range,
+use a smaller freqscale value (.0002) and
+higher resting level (-.03).  You should
+make sure that rest + 11*freqscale is less
+than 0, since the log frequency of the highest
+frequency word is about 11.
+
+You can also prime particular words using the
+
+topdown
+
+command -- it takes a list of word, prime
+pairs followed by 'q'
+
+The display is somewhat hard to read.
+It presents the word and phoneme activations,
+words above phonemes.  It is not true to
+life, in that actavations top out on the display
+before they really do internally.  You can get
+separate displays of the word and phoneme
+activations using the wordacts and phonacts
+commands.
+
+Let me know if you have any problems!!
+
+-- jlm@andrew.cmu.edu
+
