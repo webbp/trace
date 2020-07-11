@@ -1,7 +1,7 @@
 # include "defs.h"
 
 FILE *altiop = NULL;
-FILE *infp = stdin;
+FILE *infp = NULL;
 FILE *outfile = NULL;
 char outname[30];
 int ecomp();
@@ -115,6 +115,7 @@ int argc; char **argv;
 	int specflag = 0;
 	int scriptflag = 0;
 	char scriptfile[100];
+	infp = stdin;
 	srandom(time(0));
 	while (--argc > 0 && (*++argv) [0] == '-') {
 		switch (argv[0][1]) {

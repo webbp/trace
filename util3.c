@@ -20,7 +20,7 @@ quit()
 
 	if (in[0] == 'q' || in[0] == 'y') {
 		if (screenflag) end_window();
-		exit();
+		exit(0);
 	}
 	if (in[0] == 'w')
 		{
@@ -34,7 +34,7 @@ quit()
 			}
 		dump(iop);
 		if (screenflag) end_window();
-		exit();
+		exit(0);
 		}
 }
 
@@ -124,7 +124,7 @@ int type; char *str; {
 			fclose(altiop);
 			altiop = NULL;
 			if (screenflag) end_window();
-			exit();
+			exit(0);
 		}
 	    }
 	    infp = stdin;
